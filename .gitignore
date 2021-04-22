@@ -1,0 +1,7 @@
+
+out/
+.idea/modules.xml
+gradle.xml
+*.iws
+dictionaries/
+.idea/libraries/*.xml
