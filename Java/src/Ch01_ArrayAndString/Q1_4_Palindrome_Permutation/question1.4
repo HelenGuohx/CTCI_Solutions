@@ -1,0 +1,32 @@
+Palindrome Permutation: Given a string, write a function to check if it is a permutation of a palindrome.
+A palindrome is a word or phrase that is the same forwards and backwards. A permutation
+is a rearrangement of letters. The palindrome does not need to be limited to just dictionary words.
+EXAMPLE
+Input: Tact Coa
+Output: True (permutations: "taco cat", "atco cta " , etc.)
+Hints: #106, h 0134, § 136
+
+
+==========Solution1=========
+Time Complexity: O(n), n is the length of s
+Space Complexity: O(1)
+
+s = "aabbbc"
+abbcba
+
+
+count the occurrence of unique characters in s
+charToCount = {}
+for(char c: s) //s
+    charToCount.add(c, count)
+
+existOdd = false;
+for(occurrence: charToCount) //26
+    if occurrence is odd:
+        if existOdd = true
+            return false;
+        else
+            existOdd = true;
+
+
+return true;

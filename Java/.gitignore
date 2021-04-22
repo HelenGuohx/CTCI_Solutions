@@ -1,5 +1,5 @@
 
-Java/out/
+out/
 .idea/modules.xml
 gradle.xml
 *.iws

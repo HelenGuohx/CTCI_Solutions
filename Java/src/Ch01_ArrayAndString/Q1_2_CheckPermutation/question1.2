@@ -1,0 +1,54 @@
+Check Permutation: Given two strings, write a method to decide if one is a permutation of the
+other.
+Hints: ft ,
+#84
+There is one solution that is O(NlogN) time. Another solution uses some space, but is O(N) time.
+
+#122
+Could a hash table be useful?
+
+#131
+Two strings that are permutations should have the same characters, but in different
+orders. Can you make the orders the same?
+
+For example
+
+input: s1 = "abcd", s2 = "acdb"
+output: true
+
+input: s1 = "aacd", s2 = "acd"
+output: false
+
+
+==========Solution1=========
+Time Complexity: O(n) n is the length of s1/s2
+Space Complexity: O(1).
+
+if(s1.length != s2.length) return false
+
+charToCount = {}
+
+for(c in s1){ //len1
+   charToCount[c]++
+}
+
+for(c in s2){ //len2
+   if !charToCount[c] return false
+   charToCount[c]--
+}
+
+for(count in charToCount){ //128
+  if count != 0 return false
+}
+
+return true
+
+==========Solution2=========
+Time Complexity: O(nlogn) n is the length of s1 or s2
+Space Complexity: O(1).
+
+sort(s1)
+
+sort(s2)
+
+return s1.equal(s2)
