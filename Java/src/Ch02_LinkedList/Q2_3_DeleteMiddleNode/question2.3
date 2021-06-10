@@ -1,0 +1,33 @@
+Delete Middle Node: Implement an algorithm to delete a node in the middle (i.e., any node but
+the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
+that node.
+EXAMPLE
+Input: the node c from the linked list a - >b- >c - >d - >e- >f
+Result: nothing is returned, but the new linked list looks like a - > b - > d - > e - > f
+Hints: #72
+
+
+=====Solution 1: iterative====
+fast pointer runs twice as fast as slow pointer
+when fp reaches the end, sp is in the middle
+
+a - >b- >c - >d
+         f
+s
+return
+a -> b -> c
+          f
+s
+return a -> c
+
+a -> b
+f
+s
+return null
+
+When f.next is null || f.next.next is null, s is the middle
+Because we want to delete the middle, s is used to represent the prev step of middle.
+s is 1 step slower than f
+
+time complexity: O(n)
+space: O(1)

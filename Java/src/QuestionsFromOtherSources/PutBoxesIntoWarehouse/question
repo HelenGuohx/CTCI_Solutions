@@ -1,0 +1,56 @@
+Put-Boxes-Into-the-Warehouse-I
+
+Given two arrays of positive integers boxes and warehouse representing the heights of some boxes of unit width, and the heights of n rooms in a warehouse, respectively.
+The warehouse’s rooms are labeled from 0 to n - 1 from left to right where warehouse[i] (0-indexed) is the height of the i-th room.
+
+Boxes are put into the warehouse by the following rules:
+
+    Boxes can’t be piled up.
+    You can rearrange the order of the boxes.
+    Boxes can only be pushed into the warehouse from left to right only.
+    If the height of some room in the warehouse is less than the height of a box, then the box will be stopped before that room, so are the boxes behind it.
+
+Return the maximum number of boxes you can put into the warehouse.
+
+Input: boxes = [4,3,4,1], warehouse = [5,3,3,4,1]
+Output: 3
+
+Input: boxes = [1,2,2,3,4], warehouse = [3,4,1,2]
+Output: 3
+
+source: https://leetcode.ca/2020-03-12-1564-Put-Boxes-Into-the-Warehouse-I/
+
+=======solution======
+sort boxes in descending order
+room = 0
+
+for box in boxes
+    if box <= warehouse[room]
+        room++
+    if room >= warehouse.length
+        return room
+
+return room;
+
+time complexity: O(nlogn)
+space complexity: O(1)
+
+
+=======solution2======
+The room height in warehouse depends on the previous smaller room height
+for example, warehouse = [3,1,4,3], the actual height for boxes to pass is [3,1,1,1]
+
+for room_i in warehouse
+    if room_i > room_(i - 1), room_i = room_(i - 1)
+
+sort boxes
+
+i = 0;
+for box in boxes
+    while(box > warehouse[i])
+        i--
+    if box <= warehouse[i]
+        count++;
+        i--
+
+

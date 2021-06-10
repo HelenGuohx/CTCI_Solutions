@@ -1,0 +1,21 @@
+Return Kth to Last: Implement an algorithm to find the kth to last element of a singly linked list.
+Hints: #8, #25, #41, #67, #126
+
+for example
+input: 1 -> 3 -> 2 -> 5, k = 2
+output: 2
+
+
+=====Solution 1: iterative====
+After fast runs k steps, fast and slow pointers move together. when fast reaches to the end of the linked list,
+slow points to the kth. return
+
+time complexity: O(n)
+space complexity: O(1)
+
+=====Solution 2: recursion====
+recurse the linked list, when reaching to the end, counter = 0. Each parent call adds 1 to the counter.
+if counter == k, then return values.
+
+two global variables: counter and return node
+

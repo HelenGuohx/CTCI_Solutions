@@ -1,0 +1,83 @@
+Parking Lot: Design a parking lot using object-oriented principles
+
+Questions for clarification
+- what type of vehicles it supports
+- whether it has multiple levels
+- how many entrances it has?
+
+Assumptions
+- multiple levels
+- car, motorcycle, buses
+- motorcycle spot, compact spot, large spot
+- a motorcycle can park any spot
+- a car can park in either a compact or large spot
+- a bus can park in five large spots in consecutive within the same row
+
+VehicleSize enum: motorcycle, compact, large
+
+Vehicle
+---
+parkingSpots: List<Spot>
+licensePlate: String
+spotsNeeded: int
+size: VehicleSize
+
+
+getSpotsNeeded()
+getSize()
+
+parkInSpot()
+leaveSpot()
+canFitInSpot(Spot spot) abstract
+
+Car -> Vehicle
+---
+spotsNeeded = 1
+size = VehicleSize.compact
+canFitInSpot(Spot spot)
+
+Motorcycle -> Vehicle
+---
+spotsNeeded = 1
+size = VehicleSize.motorcycle
+canFitInSpot(Spot spot)
+
+Bus -> Vehicle
+---
+spotsNeeded = 5
+size = VehicleSize.large
+canFitInSpot(Spot spot)
+
+Spot
+---
+vehicle: Vehicle
+spotSize: VehicleSize
+row: int
+spotNumber: int
+level: int
+
+isVacant(): boolean
+canFitVehicle(Vehicle): boolean
+parkVehicle(Vehicle)
+removeVehicle()
+
+
+
+ParkingLot
+---
+levels: Level[]
+NUM_LEVEL
+
+parkVehicle(Vehicle)
+
+Level
+---
+floor: int
+spots: Spot[]
+numVacantSpot: int
+SPOTS_PER_ROW: static final int
+
+parkVehicle(Vehicle)
+findVacantSpot(Vehicle): return spot num
+
+

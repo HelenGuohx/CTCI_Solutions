@@ -1,0 +1,65 @@
+Partition: Write code to partition a linked list around a value x, such that all nodes less than x come
+before all nodes greater than or equal to x. If x is contained within the list, the values of x only need
+to be after the elements less than x (see below). The partition element x can appear anywhere in the
+"right partition"; it does not need to appear between the left and right partitions.
+EXAMPLE
+Input: 3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1 [partition = 5]
+Output: 3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+Hints: #3, #24
+
+#3 There are many solutions to this problem, most of which are equally optimal in runtime.
+Some have shorter, cleaner code than others. Can you brainstorm different solutions?
+
+#24. 2.4 Consider that the elements don't have to stay in the same relative order. We only need
+to ensure that elements less than the pivot must be before elements greater than the
+pivot. Does that help you come up with more solutions?
+
+=== Solution: not stable===
+two pointers
+move p1 to the first element in linked list that is greater than or equal to x
+ move p2 from p1 to the end
+    if p2 point to node less than x, then swap two node values.
+    then p1 moves to the next element greater or equal, repeat steps of p2
+
+3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1
+     p1
+
+                          p2
+3 -> 2 -> 1 -> 5 -> 10 -> 5 -> 8
+                                   p1
+
+                               p2
+
+=== Solution: stable===
+EXAMPLE
+Input: 3 -> 4 -> 8 -> 5 -> 10 -> 2 -> 1 [partition = 5]
+Output: 3 -> 4 -> 2 -> 1 -> 8 -> 5 -> 10
+
+move p1 until p1.next.val >= x
+    move p2 from p1 to end
+    if p2 < x
+        delete p2 from original position. p2.parent -> p2.next
+        insert p2 after p1. p2.next = p1.next, p1.next = p2
+        p1 = p1.next
+
+3 -> 4 -> 8 -> 5 -> 10 -> 2 -> 1
+     p1
+                          p2
+
+
+3 -> 4 -> 2 -> 8 -> 5 -> 10 -> 1
+          p1
+                               p2
+
+
+=== Solution from answer: stable===
+create two link list, one for elements less than x, one for elements >= x
+then merge two link lists
+
+dummy1 -> 3 -> 4 -> 2 -> 1
+
+dummy2 -> 8 -> 5 -> 10
+
+end1 -> dummy2.next
+
+return dummy1.next

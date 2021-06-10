@@ -1,0 +1,44 @@
+Three in One: Describe how you could use a single array to implement three stacks.
+Hints: #2, #12, #38, #58
+
+#2. 3.1 A stack is simply a data structure in which the most recently added elements are
+removed first. Can you simulate a single stack using an array? Remember that there are
+many possible solutions, and there are tradeoffs of each.
+
+=====Solution======
+suppose stack stores integer elements
+max_size = 100
+size = 0
+
+push(val){
+if size == max_size
+   double the max_size
+
+array[size++] = val
+}
+
+pop(){
+if size == 0
+    return null
+
+size--;
+}
+
+peek(){
+if size == 0
+    return null
+return array[size - 1]
+}
+
+
+#12, 3.1 We could simulate three stacks in an array by just allocating the first third of the array to
+the first stack, the second third to the second stack, and the final third to the third stack.
+One might actually be much bigger than the others, though. Can we be more flexible
+with the divisions?
+
+#38. 3.1 If you want to allow for flexible divisions, you can shift stacks around. Can you ensure
+that all available capacity is used?
+
+
+#58. 3.1 Try thinking about the array as circular, such that the end of the array "wraps around" to
+the start of the array.

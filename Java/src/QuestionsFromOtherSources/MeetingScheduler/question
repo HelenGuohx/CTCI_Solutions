@@ -1,0 +1,104 @@
+Given the availability time slots arrays slots1 and slots2 of two people and a meeting duration duration, return the earliest time slot that works for both of them and is of duration duration.
+
+If there is no common time slot that satisfies the requirements, return an empty array.
+
+The format of a time slot is an array of two elements [start, end] representing an inclusive time range from start to end.
+
+It is guaranteed that no two availability slots of the same person intersect with each other. That is, for any two time slots [start1, end1] and [start2, end2] of the same person, either start1 > end2 or start2 > end1.
+
+Example 1:
+
+Input: slots1 = [[10,50],[60,120],[140,210]], slots2 = [[0,15],[60,70]], duration = 8
+Output: [60,68]
+
+Example 2:
+
+Input: slots1 = [[10,50],[60,120],[140,210]], slots2 = [[0,15],[60,70]], duration = 12
+Output: []
+
+Constraints:
+
+    1 <= slots1.length, slots2.length <= 10^4
+    slots1[i].length, slots2[i].length == 2
+    slots1[i][0] < slots1[i][1]
+    slots2[i][0] < slots2[i][1]
+    0 <= slots1[i][j], slots2[i][j] <= 10^9
+    1 <= duration <= 10^6
+
+
+=======Solution 2=====
+sort slots1 and slots2
+index i point to current slot1
+index j point to current slot2
+
+get available time range from slot1 and slot2
+there are four available time ranges between slot1 and slot2
+1.
+slot1: ---------
+slot2:    ---
+in this case, the start time and end time of slot2 is within slot1
+2.
+slot1:    ---
+slot2: ---------
+
+3.
+slot1: -----
+slot2:    -----
+
+4.
+slot1:      ------
+slot2: --------
+
+By observing the 4 cases, we can get the following pattern
+when the time range = min(e1,e2) - max(s1, s2) >= duration, there is an available time range,
+return [max(s1, s2), max(s1, s2) + duration]
+
+otherwise,
+if e1 < e2, i++
+if e1 >= e2, j++
+
+for example, current e2 > current e1, if we move the slot2, then the next s2 > current e2 > current e1.
+There is definitely no intersection between the next slot2 and current slot1.
+Therefore, we just need move the slot with a smaller end time.
+
+Time Complexity: O(mlogm + nlogn + m + n) = O(mlogm + nlogn), m is the length of slots1, n is the length of slots2
+Space Complexity: O(1)
+
+=======Solution 2======
+merge slots1 and slots2 to one array slots
+sort slots by start time, then end time in ascending order
+
+for example,
+slots1 = [[10,50],[60,120],[140,210]]
+slots2 = [[0,15],[60,70]],
+duration = 8
+
+after sorting,
+slots = [[0,15],[10,50],[60,70],[60,120],[140,210]]
+
+loop through slots
+    if curr start time < previous end time
+        the time range is [curr start time, min(prev end time, curr end time)]
+        if time range >= duration, return [curr start time, curr start time + duration]
+
+otherwise, return []
+
+## Why can we merge two slots?
+Because it is guaranteed that no two availability slots of the same person intersect with each other.
+For example,
+slots1 = [[0,15],[20,50],[60,70]]
+slots2 = [[60,120],[140,210]]
+
+slots = [[0,15],[20,50],[60,70],[60,120],[140,210]]
+the first three slots are from slots1, and current start time is greater than previous end time.
+
+Time Complexity: O((m + n)log(m + n) + m + n) = O((m + n)log(m + n)), m is the length of slots1, n is the length of slots2
+Space Complexity: O(m + n)
+
+
+which one is bigger?
+O((m + n)log(m + n)) = O(mlog(m + n) + nlog(m + n)) > O(mlogm + nlogn)
+
+
+
+

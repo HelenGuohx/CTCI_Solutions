@@ -1,0 +1,52 @@
+Call Center: Imagine you have a call center with three levels of employees: respondent, manager,
+and director. An incoming telephone call must be first allocated to a respondent who is free. If the
+respondent can't handle the call, he or she must escalate the call to a manager. If the manager is not
+free or not able to handle it, then the call should be escalated to a director. Design the classes and
+data structures for this problem. Implement a method dispatchCall () which assigns a call to
+the first available employee.
+
+Employee
+---
+rank
+currentCall
+receiveCall()
+completeCall()
+escalateCall()
+
+isFree(): boolean
+
+Respondent <- Employee
+
+Manager <- Employee
+
+Director <- Employee
+
+Call
+---
+handler: Employee
+rank
+incrementRank()
+
+Rank enum
+---
+value: int
+getValue()
+
+
+CallCenter
+---
+employeeTable: List<List<Employee>>
+callWaitingList: queue
+
+//a call arrives, dispatch the call to corresponding employee the rank of call
+dispatchCall(Call call):
+//scan respondent lists, if anyone is free, the assign call, else put the call in waiting list
+
+//when an employee is free, assign call
+assignCall(Employee emp)
+
+
+
+
+
+
